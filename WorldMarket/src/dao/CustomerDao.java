@@ -35,7 +35,7 @@ public class CustomerDao {
 					String eMail = rs.getString(6);
 
 					Customer customer = new Customer(customerID, customerPW, name, age, phoneNumber, eMail);
-					//System.out.println(customer.toString());
+					System.out.println(customer.toString());
 					list.add(customer);
 
 

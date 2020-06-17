@@ -2,8 +2,8 @@
     pageEncoding="EUC-KR"%>
     <%@page import = "java.util.*" %>
     <%@page import = "java.sql.*" %>
-    <%@page import = "dto.Customer" %>
-    <%@page import = "dao.CustomerDao" %>
+    <%@page import = "dto.*" %>
+    <%@page import = "dao.*" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,6 +13,10 @@
 <body>
 <%
 CustomerDao customer = new CustomerDao();
+
+Customer c1 = new Customer("test02","1234","Oh",12,"0102939","dd@gmail.com");
+
+customer.addCustomer(c1);
 List l = customer.getCustomers();
 
 %>
