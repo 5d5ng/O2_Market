@@ -35,7 +35,7 @@ public class CustomerDao {
 					String eMail = rs.getString(6);
 
 					Customer customer = new Customer(customerID, customerPW, name, age, phoneNumber, eMail);
-					System.out.println(customer.toString());
+					//System.out.println(customer.toString());
 					list.add(customer);
 
 
@@ -54,6 +54,18 @@ public class CustomerDao {
 
 
 
+	}
+	
+	
+	
+	public Customer chkCustomer(String InputID,String InputPW,List<Customer> list) {
+		for(Customer c: list) {
+			if(InputID.equals(c.getCustomerID()) && InputPW.equals(c.getCustomerPW())) {
+				return c;
+			}
+		}
+
+		return null;
 	}
   
 	//회원추가
@@ -103,5 +115,7 @@ public class CustomerDao {
 
 		return insertCount;
 	}
+	
+	
 
 }

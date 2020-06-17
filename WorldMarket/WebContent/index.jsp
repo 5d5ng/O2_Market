@@ -12,14 +12,14 @@
 </head>
 <body>
 <%
-CustomerDao customer = new CustomerDao();
-
-Customer c1 = new Customer("test02","1234","Oh",12,"0102939","dd@gmail.com");
-
-customer.addCustomer(c1);
-List l = customer.getCustomers();
-
+	Customer customer = (Customer) session.getAttribute("pCustomer");
+	if(customer == null){
+		response.sendRedirect("Login.jsp");
+	}
 %>
-ss
+<h1>¹®¾î¹ß ¼îÇÎ¸ô</h1>
+
+
+
 </body>
 </html>
