@@ -41,10 +41,10 @@
 		<ul>
 			<li><a href="#">Category</a>
 				<ul>
-					<li><a href="#">Clothing</a></li>
-					<li><a href="#">Cosmetics</a></li>
-					<li><a href="#">Home Appliances</a></li>
-					<li><a href="#">Foods</a></li>
+					<li><a href="./Category/Clothing.jsp">Clothing</a></li>
+					<li><a href="./Category/Cosmetics.jsp">Cosmetics</a></li>
+					<li><a href="./Category/HomeAppliances.jsp">Home Appliances</a></li>
+					<li><a href="./Category/Foods.jsp">Foods</a></li>
 				</ul></li>
 		</ul>
 	</nav>
