@@ -41,10 +41,10 @@
 		<ul>
 			<li><a href="#">Category</a>
 				<ul>
-					<li><a href="#">의류</a></li>
-					<li><a href="#">화장품</a></li>
-					<li><a href="#">가전</a></li>
-					<li><a href="#">식품</a></li>
+					<li><a href="#">Clothing</a></li>
+					<li><a href="#">Cosmetics</a></li>
+					<li><a href="#">Home Appliances</a></li>
+					<li><a href="#">Foods</a></li>
 				</ul></li>
 		</ul>
 	</nav>
