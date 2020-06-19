@@ -1,9 +1,9 @@
 @charset "EUC-KR";
 body{
-  background: #343d46;
+  background: #F2EEE9;
 }
 #name{
-	color : white;
+	color : black;
 	text-align:center;
 	font-size: xx-large;
 }
@@ -152,3 +152,49 @@ body{
   .container-4:hover button.icon:hover{
     background: white;
   }
+  
+  
+  .items {
+    display: block;
+    margin: 20px 0;
+}
+.item {
+    background-color: #fff;
+    float: left;
+    margin: 0 10px 10px 0;
+    width: 205px;
+    padding: 10px;
+    height: 290px;
+}
+.item img {
+    display: block;
+    margin: auto;
+}
+h2 {
+    font-size: 16px;
+    display: block;
+    border-bottom: 1px solid #ccc;
+    margin: 0 0 10px 0;
+    padding: 0 0 5px 0;
+}
+button {
+    border: 1px solid #722A1B;
+    padding: 4px 14px;
+    background-color: #fff;
+    color: #722A1B;
+    text-transform: uppercase;
+    float: right;
+    margin: 5px 0;
+    font-weight: bold;
+    cursor: pointer;
+}
+span {
+    float: right;
+}
+.shopping-cart {
+    display: inline-block;
+    background: url('http://cdn1.iconfinder.com/data/icons/jigsoar-icons/24/_cart.png') no-repeat 0 0;
+    width: 24px;
+    height: 24px;
+    margin: 0 10px 0 0;
+}

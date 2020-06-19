@@ -23,10 +23,18 @@
 	response.sendRedirect("Login.jsp");
 	} 
 	*/
+	
+	ProductDao PDao = new ProductDao();
+	List<Product> list = PDao.getProduct();
 	%>
+
+
+
+
+
 	<br>
 	<br>
-	<div id="name">월 드 마 켓</div>
+	<div id="name">Wolrd Market</div>
 
 	<div class="box">
 		<div class="container-4">
@@ -43,10 +51,27 @@
 				<ul>
 					<li><a href="./Category/Clothing.jsp">Clothing</a></li>
 					<li><a href="./Category/Cosmetics.jsp">Cosmetics</a></li>
-					<li><a href="./Category/HomeAppliances.jsp">Home Appliances</a></li>
+					<li><a href="./Category/HomeAppliances.jsp">Home
+							Appliances</a></li>
 					<li><a href="./Category/Foods.jsp">Foods</a></li>
 				</ul></li>
 		</ul>
 	</nav>
+
+	<div class="items">
+		<% 
+	for(int i=0; i<list.size();i++){
+	%>
+		<div class="item">
+			<img src="./Category/images/<%=list.get(i).getProductNumber() %>.jpg" alt="item" />
+			<h2><%= list.get(i).getProductName() %></h2>
+			<p>
+				Price: <em><%= list.get(i).getProductPrice() %></em>
+			</p>
+			<button class="add-to-cart" type="button">Add to cart</button>
+		</div>
+		<%}%>
+	</div>
+
 </body>
 </html>

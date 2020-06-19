@@ -31,15 +31,14 @@ public class ProductDao {
 				PreparedStatement ps = conn.prepareStatement(sql)) {
 			try(ResultSet rs = ps.executeQuery()){
 				while(rs.next()) {
-					
 					 int productNumber = rs.getInt(1);
 					 int productPrice = rs.getInt(2);
 					 String productName = rs.getString(3);
 					 int stock = rs.getInt(4);
-					 String supplier = rs.getString(5);
 					 String category = rs.getString(6);
+					 String supplier = rs.getString(5);
 					 
-					 Product product = new Product(productNumber, productPrice, productName, stock, supplier, category);
+					 Product product = new Product(productNumber, productPrice, productName, stock, category, supplier);
 					 list.add(product);
 				}
 			}catch(Exception e) {
