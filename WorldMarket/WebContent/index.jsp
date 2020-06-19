@@ -34,7 +34,7 @@
 
 	<br>
 	<br>
-	<div id="name">Wolrd Market</div>
+	<div id="name">World Market</div>
 
 	<div class="box">
 		<div class="container-4">
@@ -63,15 +63,18 @@
 	for(int i=0; i<list.size();i++){
 	%>
 		<div class="item">
+		<form name ="f" method="post" >
 			<img src="./Category/images/<%=list.get(i).getProductNumber() %>.jpg" alt="item" />
 			<h2><%= list.get(i).getProductName() %></h2>
 			<p>
 				Price: <em><%= list.get(i).getProductPrice() %></em>
 			</p>
-			<button class="add-to-cart" type="button">Add to cart</button>
+			<button class="add-to-cart" type="button" id="add" name="newOrder" onclick = "location.href = 'cart.jsp'">Add to cart</button>
+		</form>
 		</div>
 		<%}%>
 	</div>
+	
 
 </body>
 </html>

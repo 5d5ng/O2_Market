@@ -4,6 +4,13 @@ public class Delivery {
 
 		private String DeliveryID;
 		private String Status;
+		private int HistoryNumber;
+		public int getHistoryNumber() {
+			return HistoryNumber;
+		}
+		public void setHistoryNumber(int historyNumber) {
+			HistoryNumber = historyNumber;
+		}
 		public String getDeliveryID() {
 			return DeliveryID;
 		}
@@ -16,14 +23,17 @@ public class Delivery {
 		public void setStatus(String status) {
 			Status = status;
 		}
-		public Delivery(String deliveryID, String status) {
+		public Delivery(String deliveryID, String status, int historyNumber) {
 			super();
 			DeliveryID = deliveryID;
 			Status = status;
+			HistoryNumber = historyNumber;
 		}
 		@Override
 		public String toString() {
-			return "Delivery [DeliveryID=" + DeliveryID + ", Status=" + Status + "]";
+			return "Delivery [DeliveryID=" + DeliveryID + ", Status=" + Status + ", HistoryNumber=" + HistoryNumber
+					+ "]";
 		}
+		
 		
 }

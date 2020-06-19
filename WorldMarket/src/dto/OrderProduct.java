@@ -4,7 +4,6 @@ public class OrderProduct {
 
 	private int OrderNumber;
 	private int Quantity;
-	private String DeliveryID;
 	private String CustomerID;
 	private int ProductNumber;
 	private int HistoryNumber;
@@ -21,12 +20,7 @@ public class OrderProduct {
 	public void setQuantity(int quantity) {
 		Quantity = quantity;
 	}
-	public String getDeliveryID() {
-		return DeliveryID;
-	}
-	public void setDeliveryID(String deliveryID) {
-		DeliveryID = deliveryID;
-	}
+
 	public String getCustomerID() {
 		return CustomerID;
 	}
@@ -45,22 +39,21 @@ public class OrderProduct {
 	public void setHistoryNumber(int historyNumber) {
 		HistoryNumber = historyNumber;
 	}
-	public OrderProduct(int orderNumber, int quantity, String deliveryID, String customerID, int productNumber,
-			int historyNumber) {
+
+	public OrderProduct(int orderNumber, int quantity, String customerID, int productNumber, int historyNumber) {
 		super();
 		OrderNumber = orderNumber;
 		Quantity = quantity;
-		DeliveryID = deliveryID;
 		CustomerID = customerID;
 		ProductNumber = productNumber;
 		HistoryNumber = historyNumber;
 	}
 	@Override
 	public String toString() {
-		return "Order [OrderNumber=" + OrderNumber + ", Quantity=" + Quantity + ", DeliveryID=" + DeliveryID
-				+ ", CustomerID=" + CustomerID + ", ProductNumber=" + ProductNumber + ", HistoryNumber=" + HistoryNumber
-				+ "]";
+		return "OrderProduct [OrderNumber=" + OrderNumber + ", Quantity=" + Quantity + ", CustomerID=" + CustomerID
+				+ ", ProductNumber=" + ProductNumber + ", HistoryNumber=" + HistoryNumber + "]";
 	}
+	
 	
 	
 	

@@ -32,8 +32,9 @@ public class DeliveryDao {
 							
 						String deliveryID = rs.getString(1);
 						String status = rs.getString(2);
+						int historyNumber = rs.getInt(3);
 						
-						Delivery delivery = new Delivery(deliveryID, status);
+						Delivery delivery = new Delivery(deliveryID, status,historyNumber);
 						
 						list.add(delivery);
 
@@ -61,12 +62,13 @@ public class DeliveryDao {
 			try {
 				Class.forName("oracle.jdbc.OracleDriver");
 				conn = DriverManager.getConnection(dburl,dbUser,dbpasswd);
-				String sql = "INSERT INTO Customer VALUES (?,?)";
+				String sql = "INSERT INTO Customer VALUES (?,?,?)";
 				
 				ps = conn.prepareStatement(sql);
 				
 				ps.setString(1, delivery.getDeliveryID());
 				ps.setString(2, delivery.getStatus());
+				ps.setInt(3, delivery.getHistoryNumber());
 				
 				insertCount = ps.executeUpdate();
 				

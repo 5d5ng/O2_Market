@@ -23,7 +23,7 @@ public class OrderProductDao {
 			e.printStackTrace();
 		}
 		
-		String sql = "SELECT * from Order";
+		String sql = "SELECT * from OrderProduct";
 		
 		
 		try(Connection conn = DriverManager.getConnection(dburl, dbUser, dbpasswd);
@@ -34,12 +34,12 @@ public class OrderProductDao {
 
 					int orderNumber = rs.getInt(1);
 					int quantity = rs.getInt(2);
-					String deliveryID = rs.getString(3);
-					String customerID = rs.getString(4);
-					int productNumber = rs.getInt(5);
-					int historyNumber = rs.getInt(6);
+				
+					String customerID = rs.getString(3);
+					int productNumber = rs.getInt(4);
+					int historyNumber = rs.getInt(5);
 					
-					OrderProduct order = new OrderProduct(orderNumber, quantity, deliveryID, customerID, productNumber, historyNumber);
+					OrderProduct order = new OrderProduct(orderNumber, quantity, customerID, productNumber, historyNumber);
 					list.add(order);
 				}
 			}catch(Exception e) {
@@ -65,16 +65,16 @@ public class OrderProductDao {
 			Class.forName("oracle.jdbc.OracleDriver");
 
 			conn = DriverManager.getConnection(dburl,dbUser,dbpasswd);
-			String sql =  "INSERT INTO OrderProduct VALUES (?,?,?,?,?,?)";
+			String sql =  "INSERT INTO OrderProduct VALUES (?,?,?,?,?)";
 			
 			ps = conn.prepareStatement(sql);
 			
 			ps.setInt(1, orderProduct.getOrderNumber());
 			ps.setInt(2, orderProduct.getQuantity());
-			ps.setString(3, orderProduct.getDeliveryID());
-			ps.setString(4, orderProduct.getCustomerID());
-			ps.setInt(5, orderProduct.getProductNumber());
-			ps.setInt(6,orderProduct.getHistoryNumber());
+			
+			ps.setString(3, orderProduct.getCustomerID());
+			ps.setInt(4, orderProduct.getProductNumber());
+			ps.setInt(5,orderProduct.getHistoryNumber());
 			
 
 			insertCount = ps.executeUpdate();

@@ -7,11 +7,7 @@ public class PurchasHistoryDao {
 	private static  String dburl =  "jdbc:oracle:thin:@db.pknu.ac.kr:1521:xe";
 	private static  String dbUser = "db201512119";
 	private static  String dbpasswd = "201512119";
-//	private int HistoryNumber;
-//	private String CustomerID;
-//	private int TotalCost;
-//	private String PaymentStatus;
-	
+
 	public List<PurchaseHistory> getPurchaseHistories(){
 		List<PurchaseHistory> list = new LinkedList<>();
 		try {
@@ -20,7 +16,7 @@ public class PurchasHistoryDao {
 		}catch(ClassNotFoundException e) {
 			e.printStackTrace();
 		}
-		String sql  = "SELCET * FROM PURCHASEHISTORY";
+		String sql  = "SELECT * FROM PurchaseHistory";
 		try(Connection conn = DriverManager.getConnection(dburl,dbUser,dbpasswd);
 				PreparedStatement ps = conn.prepareStatement(sql)){
 			try(ResultSet rs = ps.executeQuery()){
