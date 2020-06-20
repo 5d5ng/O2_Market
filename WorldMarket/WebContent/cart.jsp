@@ -12,6 +12,8 @@
 </head>
 <body>
 	<%
+
+	
 		request.setCharacterEncoding("euc-kr");
 		Customer customer = (Customer) session.getAttribute("pCustomer"); //로그인 고객
 
@@ -31,7 +33,8 @@
 		String status = "yet"; // 결제전이라는 의미
 
 		Product nowProduct = (Product) session.getAttribute("order"); //담을 제품
-		session.removeAttribute("order");
+		//session.removeAttribute("order");
+		//productDao.updateProduct(nowProduct.getProductNumber());
 
 		System.out.print(nowProduct.toString());
 		PurchaseHistory shoppingCart = null;
@@ -43,6 +46,9 @@
 				break;
 			}
 		}
+
+		
+		
 		
 		
 		if (shoppingCart == null) { //장바구니를 새로 만들어야한다면
@@ -73,6 +79,7 @@
 				
 				if(Hnum == CartHnum && CID.equals(oProductCID) && oProdcutNum == Pnum){ //OrderProduct객체 중 주문번호,회원아이디,제품번호 셋다 동일한 경우
 						//UPDATE문 작성
+					//orderDao.updateProduct(oProdcutNum);
 					break;
 				}
 				

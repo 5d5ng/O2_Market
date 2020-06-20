@@ -72,6 +72,7 @@
 			<%
 				if(isLogin){			
 					session.setAttribute("order", productList.get(i));
+					System.out.println(i);
 					
 					%>
 					<button class="add-to-cart" type="button" id="add" name="newOrder" onclick = "location.href = 'cart.jsp'">Add to cart</button>

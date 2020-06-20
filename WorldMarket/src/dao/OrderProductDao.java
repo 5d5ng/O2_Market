@@ -9,6 +9,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import dto.OrderProduct;
+import dto.Product;
 
 public class OrderProductDao {
 	private static  String dburl =  "jdbc:oracle:thin:@db.pknu.ac.kr:1521:xe";
@@ -101,6 +102,27 @@ public class OrderProductDao {
 		}
 
 		return insertCount;
+	}
+	
+	public void updateProduct(int orderProductNum) {
+		String sql = "UPDATE OrderProduct set quantitiy=quantitiy+1 where Ordernumber = ?";
+		try {
+			
+			Class.forName("oracle.jdbc.OracleDriver");
+		
+		Connection conn = DriverManager.getConnection(dburl, dbUser, dbpasswd);
+		
+		PreparedStatement ps = conn.prepareStatement(sql);
+		ps.setInt(1,orderProductNum);
+		int numRows = ps.executeUpdate();
+		ps.close();
+		conn.close();
+		
+	}catch(SQLException e) {
+		e.printStackTrace();
+	}catch(ClassNotFoundException e) {
+		e.printStackTrace();
+	}
 	}
 
  

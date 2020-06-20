@@ -103,6 +103,25 @@ public class ProductDao {
 		
 		
 		
-		
+	}
+	public void updateProduct(int productNum) {
+		String sql = "UPDATE product set stock=stock-1 where productNumber = ?";
+		try {
+			
+				Class.forName("oracle.jdbc.OracleDriver");
+			
+			Connection conn = DriverManager.getConnection(dburl, dbUser, dbpasswd);
+			
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setInt(1,40);
+			int numRows = ps.executeUpdate();
+			ps.close();
+			conn.close();
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}catch(ClassNotFoundException e) {
+			e.printStackTrace();
+		}
 	}
 }
