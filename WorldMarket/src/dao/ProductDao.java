@@ -35,10 +35,11 @@ public class ProductDao {
 					 int productPrice = rs.getInt(2);
 					 String productName = rs.getString(3);
 					 int stock = rs.getInt(4);
-					 String category = rs.getString(6);
 					 String supplier = rs.getString(5);
+					 String category = rs.getString(6);
+
 					 
-					 Product product = new Product(productNumber, productPrice, productName, stock, category, supplier);
+					 Product product = new Product(productNumber, productPrice, productName, stock, supplier, category);
 					 list.add(product);
 				}
 			}catch(Exception e) {
