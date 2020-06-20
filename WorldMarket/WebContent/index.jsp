@@ -17,15 +17,15 @@
 </head>
 <body>
 	<%
-		/* 
+	boolean isLogin = false;
 	Customer customer = (Customer) session.getAttribute("pCustomer");
-	if(customer == null){
-	response.sendRedirect("Login.jsp");
+	if(customer != null){
+		isLogin = true;
 	} 
-	*/
+	
 	
 	ProductDao PDao = new ProductDao();
-	List<Product> list = PDao.getProduct();
+	List<Product> productList = PDao.getProduct();
 	%>
 
 
@@ -60,16 +60,34 @@
 
 	<div class="items">
 		<% 
-	for(int i=0; i<list.size();i++){
+	for(int i=0; i<productList.size();i++){
 	%>
 		<div class="item">
 		<form name ="f" method="post" >
-			<img src="./Category/images/<%=list.get(i).getProductNumber() %>.jpg" alt="item" />
-			<h2><%= list.get(i).getProductName() %></h2>
+			<img src="./Category/images/<%=productList.get(i).getProductNumber() %>.jpg" alt="item" />
+			<h2><%= productList.get(i).getProductName() %></h2>
 			<p>
-				Price: <em><%= list.get(i).getProductPrice() %></em>
+				Price: <em><%= productList.get(i).getProductPrice() %></em>
 			</p>
-			<button class="add-to-cart" type="button" id="add" name="newOrder" onclick = "location.href = 'cart.jsp'">Add to cart</button>
+			<%
+				if(isLogin){			
+					session.setAttribute("order", productList.get(i));
+					
+					%>
+					<button class="add-to-cart" type="button" id="add" name="newOrder" onclick = "location.href = 'cart.jsp'">Add to cart</button>
+					<%			
+				}
+			
+				else{
+					%>
+					<button class="add-to-cart" type="button" id="add" name="newOrder" onclick = "location.href = 'Login.jsp'">Add to cart</button>
+					<%
+				}
+			
+			%>
+			
+			
+			
 		</form>
 		</div>
 		<%}%>

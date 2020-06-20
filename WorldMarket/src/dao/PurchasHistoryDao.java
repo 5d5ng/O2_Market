@@ -85,4 +85,41 @@ public class PurchasHistoryDao {
 		return insertCount;
 		
 	}
+	
+	public List<PurchaseHistory> getCustomerHistories(String CustomerID) {
+		List<PurchaseHistory> list = new LinkedList<>();
+
+		Connection conn = null;
+		PreparedStatement ps = null;
+
+		try {
+			Class.forName("oracle.jdbc.OracleDriver");
+
+			conn = DriverManager.getConnection(dburl,dbUser,dbpasswd);
+			String sql =  "SELECT * FROM PurchaseHistory WHERE CustomerID = ?";
+			
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, CustomerID);
+			
+			ResultSet rs = ps.executeQuery();
+			System.out.print("ss");
+				while(rs.next()) {
+					int historyNumber = rs.getInt(1);
+					String customerID = rs.getString(2);
+					int totalCost = rs.getInt(3);
+					String paymentStatus = rs.getString(4);
+					
+					PurchaseHistory purchaseHistory = new PurchaseHistory(historyNumber, customerID, totalCost, paymentStatus);
+					list.add(purchaseHistory);
+				}
+			}catch(Exception e) {
+					e.printStackTrace();
+			}
+
+
+
+		return list;
+		
+	}
+	
 }
