@@ -26,7 +26,7 @@
 	
 	ProductDao PDao = new ProductDao();
 	List<Product> productList = PDao.getProduct();
-	//PDao.PrintP();
+	PDao.PrintP();
 	%>
 
 

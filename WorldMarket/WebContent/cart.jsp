@@ -3,6 +3,7 @@
 <%@page import="java.util.*"%>
 <%@page import="java.sql.*"%>
 <%@page import="dto.*"%>
+<%@page import="dao.ProductDao"%>
 <%@page import="dao.*"%>
 <!DOCTYPE html>
 <html>
@@ -34,7 +35,12 @@
 
 		Product nowProduct = (Product) session.getAttribute("order"); //담을 제품
 		//session.removeAttribute("order");
-		//productDao.updateProduct(nowProduct.getProductNumber());
+		System.out.println(nowProduct.getProductName());
+		
+		 
+			
+		
+		
 
 		System.out.print(nowProduct.toString());
 		PurchaseHistory shoppingCart = null;
