@@ -123,8 +123,8 @@ public class PurchasHistoryDao {
 		
 	}
 	
-	public void updatePurchaseHisory(int newCost,int historyNum) { //장바구니에 상품 추가 시 총 업데이트
-		String sql = "UPDATE PurchaseHistory set totalcost = ? where Historynumber = ? ";
+	public void updatePurchaseHisory(int productCost,int historyNum) { //장바구니에 상품 추가 시 총 업데이트
+		String sql = "UPDATE PurchaseHistory set totalcost = totalcost+? where Historynumber = ? ";
 		
 		try {
 			Class.forName("oracle.jdbc.OracleDriver");
@@ -132,7 +132,7 @@ public class PurchasHistoryDao {
 			Connection conn = DriverManager.getConnection(dburl, dbUser, dbpasswd);
 			
 			PreparedStatement ps = conn.prepareStatement(sql);
-			ps.setInt(1,newCost);
+			ps.setInt(1,productCost);
 			ps.setInt(2,historyNum);
 			
 			int num = ps.executeUpdate();

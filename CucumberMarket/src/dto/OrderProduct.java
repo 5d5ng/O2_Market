@@ -50,8 +50,8 @@ public class OrderProduct {
 	}
 	@Override
 	public String toString() {
-		return "OrderProduct [OrderNumber=" + OrderNumber + ", Quantity=" + Quantity + ", CustomerID=" + CustomerID
-				+ ", ProductNumber=" + ProductNumber + ", HistoryNumber=" + HistoryNumber + "]";
+		return "상품주문번호:" + OrderNumber + ", 주문수량:" + Quantity + ", 고객ID" + CustomerID
+				+ ", 상품번호:" + ProductNumber + "구매내역번호:" + HistoryNumber + "]";
 	}
 	
 	

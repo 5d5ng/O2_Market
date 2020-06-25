@@ -15,8 +15,10 @@ public class Test {
 		Pdao.deleteProduct(400);
 		//OPdao.updateOrderProduct(1);
 //		PHdao.updatePurchaseHisory(11231, 1);
-		PHdao.deletePurchaseHistory(2);
 
+		List l = OPdao.getOrderbyHistroynum(1);
+		System.out.println(l.size());
+		
 	}
 
 }

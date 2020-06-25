@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.util.LinkedList;
 import java.util.List;
 
+import dto.OrderProduct;
 import dto.Product;
 
 public class ProductDao {
@@ -105,8 +106,8 @@ public class ProductDao {
 
 	}
 
-	public List<Product> getProduct2(){
-		List<Product> list = new LinkedList<>();
+	public Product getProductbyPnum(int Pnum){
+		Product product = null;
 		try {
 			Class.forName("oracle.jdbc.OracleDriver");
 
@@ -114,32 +115,38 @@ public class ProductDao {
 			e.printStackTrace();
 		}
 
-		String sql = "SELECT * FROM PRODUCT";
-		try(Connection conn = DriverManager.getConnection(dburl, dbUser, dbpasswd);
-				PreparedStatement ps = conn.prepareStatement(sql)) {
-			try(ResultSet rs = ps.executeQuery()){
-				while(rs.next()) {
-					int productNumber = rs.getInt(1);
-					int productPrice = rs.getInt(2);
-					String productName = rs.getString(3);
-					int stock = rs.getInt(4);
-					String supplier = rs.getString(5);
-					String category = rs.getString(6);
+		String sql = "SELECT * FROM PRODUCT where productnumber = ?";
+		try {
 
 
-					Product product = new Product(productNumber, productPrice, productName, stock, supplier, category);
-					list.add(product);
-				}
-			}catch(Exception e) {
-				e.printStackTrace();
+			Connection conn = DriverManager.getConnection(dburl, dbUser, dbpasswd);
+
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setInt(1,Pnum);
+			
+			ResultSet rs = ps.executeQuery();
+			while(rs.next()) {
+				int productNumber = rs.getInt(1);
+				int productPrice = rs.getInt(2);
+				String productName = rs.getString(3);
+				int stock = rs.getInt(4);
+				String supplier = rs.getString(5);
+				String category = rs.getString(6);
+
+
+				 product = new Product(productNumber, productPrice, productName, stock, supplier, category);
+			
 			}
+			
+			
+			ps.close();
+			conn.close();
 
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+		}catch(SQLException e) {
 			e.printStackTrace();
 		}
 
-		return list;
+		return product;
 	}
 
 
