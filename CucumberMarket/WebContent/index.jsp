@@ -36,6 +36,7 @@
 	<br>
 	<br>
 	<div id="name">World Market</div>
+	<button name = "logout" type = "button" onclick="location.href= 'Login.jsp' ">로그아웃</button>
 
 	<div class="box">
 		<div class="container-4">
@@ -64,19 +65,22 @@
 	for(int i=0; i<productList.size();i++){
 	%>
 		<div class="item">
-		<form name ="f" method="post" >
+		<form name =<%=Integer.toString(i) %> method="get" action = "cart.jsp">
 			<img src="./Category/images/<%=productList.get(i).getProductNumber() %>.jpg" alt="item" />
 			<h2><%= productList.get(i).getProductName() %></h2>
 			<p>
 				Price: <em><%= productList.get(i).getProductPrice() %></em>
 			</p>
 			<%
-				if(isLogin){			
+				if(isLogin){
+					
 					session.setAttribute("order", productList.get(i));
 					System.out.println(i);
 					
 					%>
-					<button class="add-to-cart" type="button" id="add" name="newOrder" onclick = "location.href = 'cart.jsp'">Add to cart</button>
+					<!--  <button class="add-to-cart" type="button" id="add" name="newOrder" onclick = "location.href = 'cart.jsp'">Add to cart</button>
+					-->
+					<input type = "submit" value="장바구니 담기"></input>
 					<%			
 				}
 			
