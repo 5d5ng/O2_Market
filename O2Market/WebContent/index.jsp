@@ -75,7 +75,7 @@
 				if(isLogin){
 
 					%>
-					<button class="add-to-cart" type="button" id="add" name="newOrder" onclick = "location.href = 'ShoppingCart.jsp?order=<%=productList.get(i).getProductNumber()%>'">Add to cart</button>
+					<button class="add-to-cart" type="button" id="add" name="newOrder" onclick = "location.href = 'cart.jsp?order=<%=productList.get(i).getProductNumber()%>'">Add to cart</button>
 
 					<%
 				}

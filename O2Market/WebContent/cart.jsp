@@ -27,6 +27,11 @@
 
 		OrderProductDao orderDao = new OrderProductDao();
 		ProductDao productDao = new ProductDao();
+		
+		String parm = request.getParameter("order");
+		int ProductNum = Integer.parseInt(parm)-1; // 제품 파라미터로 받아옴
+		System.out.println(ProductNum);
+		
 		PurchasHistoryDao PHistoryDao = new PurchasHistoryDao();
 
 		List<OrderProduct> orderList = orderDao.getOrders();
@@ -36,15 +41,16 @@
 		String cID = customer.getCustomerID();
 		String status = "결제 대기"; // 결제전이라는 의미
 
-		Product nowProduct = (Product) session.getAttribute("order"); //담을 제품
-		//session.removeAttribute("order");
+//		Product nowProduct = (Product) session.getAttribute("order"); //담을 제품
+		Product nowProduct = productList.get(ProductNum);	
+//session.removeAttribute("order");
 		System.out.println(nowProduct.getProductName());
 		
 
-		System.out.print(nowProduct.toString());
+		//System.out.print(nowProduct.toString());
 		PurchaseHistory shoppingCart = null;
 		OrderProduct nowOrderProduct = null; // 
-
+ 
 		for (PurchaseHistory history : historyList) {
 			if (cID.equals(history.getCustomerID()) && status.equals(history.getPaymentStatus().trim())) { //결제하기 전 상태이고 CID에 해당하는 히스토리가 있다면 불러온다.
 				shoppingCart = history;
