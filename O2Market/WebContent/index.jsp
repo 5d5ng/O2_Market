@@ -18,15 +18,16 @@
 <body>
 	<%
 	boolean isLogin = false;
+	String loginStatus = "로그인";
 	Customer customer = (Customer) session.getAttribute("pCustomer");
 	if(customer != null){
+		loginStatus = "로그아웃";
 		isLogin = true;
 	} 
 	
 	
 	ProductDao PDao = new ProductDao();
 	List<Product> productList = PDao.getProduct();
-	//PDao.PrintP();
 	%>
 
 
@@ -36,7 +37,8 @@
 	<br>
 	<br>
 	<div id="name">World Market</div>
-	<button name = "logout" type = "button" onclick="location.href= 'Login.jsp' ">로그아웃</button>
+	<button name = "logout" type = "button" onclick="location.href= 'Login.jsp' "><%=loginStatus %></button>
+	
 
 	<div class="box">
 		<div class="container-4">

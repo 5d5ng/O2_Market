@@ -146,6 +146,28 @@ public class PurchasHistoryDao {
 		}
 		
 	}
+	public void updatePurchaseStatus(int historyNum) { //장바구니에 결제완료 변경
+		String sql = "UPDATE PurchaseHistory set paymentStatus = '결제완료' where Historynumber = ? ";
+		
+		try {
+			Class.forName("oracle.jdbc.OracleDriver");
+			
+			Connection conn = DriverManager.getConnection(dburl, dbUser, dbpasswd);
+			
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setInt(1,historyNum);
+			
+			int num = ps.executeUpdate();
+			ps.close();
+			conn.close();
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}catch(ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		
+	}
 	
 	public void deletePurchaseHistory(int historyNum) { //구매내역 삭제 메소
 		String sql = "DELETE from PurchaseHistory where historynumber = ?";
