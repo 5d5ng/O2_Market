@@ -101,8 +101,8 @@
 	}
 
 	//히스토리에 OrderProduct 추가하는 부분
+orderList = orderDao.getOrders(); //제품담은 후 다시받아오기
 
-	List<PurchaseHistory> nowHistory = PHistoryDao.getCustomerHistories(customer.getCustomerID()); // 현재 로그인 고객의 구매리스트
 	%>
 
 	<div>
@@ -117,12 +117,13 @@
 				
 				
 				for (OrderProduct Oproduct : orderList) {
-					if(Oproduct.getHistoryNumber()==shoppingCart.getHistoryNumber())
+					if(Oproduct.getHistoryNumber()==shoppingCart.getHistoryNumber()){
 		%>
-		상품 내역<br>
-		<%=Oproduct.toString()%><br> 제품 정보<%=productDao.getProductbyPnum(Oproduct.getProductNumber()).toString()%>
-		<%
+		 제품 정보<br><%=productDao.getProductbyPnum(Oproduct.getProductNumber()).toString()%> 주문량 : <%=Oproduct.getQuantity() %><br>
+		
+		<%System.out.println(Oproduct.toString());
 			}
+				}
 		
 		
 			

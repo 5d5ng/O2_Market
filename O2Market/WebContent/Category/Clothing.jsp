@@ -13,6 +13,7 @@
 
 </head>
 <body>
+
 	<div class="wrapper">
 		<h1>Clothing</h1>
 		<span><i class="shopping-cart"></i></span>
@@ -32,7 +33,7 @@
 				<p>
 					Price: <em><%=list.get(i).getProductPrice()%></em>
 				</p>
-				<button class="add-to-cart" type="button">Add to cart</button>
+				<button class="add-to-cart" type="button" id="add" name="newOrder" onclick = "location.href = '../cart.jsp?order=<%=list.get(i).getProductNumber()%>'">Add to cart</button>
 			</div>
 			<%
 			}

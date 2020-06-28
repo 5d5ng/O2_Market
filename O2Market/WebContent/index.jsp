@@ -19,9 +19,13 @@
 	<%
 	boolean isLogin = false;
 	String loginStatus = "로그인";
+	String Mypage = null;
+
 	Customer customer = (Customer) session.getAttribute("pCustomer");
 	if(customer != null){
 		loginStatus = "로그아웃";
+		Mypage = "마이페이지";
+
 		isLogin = true;
 	} 
 	
@@ -37,17 +41,21 @@
 	<br>
 	<br>
 	<div id="name">World Market</div>
-	<button name = "logout" type = "button" onclick="location.href= 'Login.jsp' "><%=loginStatus %></button>
-	
-
+	<button name = "logout" type = "button" onclick="location.href= 'Login.jsp' "><%= loginStatus%></button>
+	<% if(Mypage != null) { %>
+	<button name = "Mypage" type = "button" onclick="location.href= 'Mypage.jsp' "><%= Mypage%></button>
+	<% } %>
+	<form action="Search.jsp">
 	<div class="box">
 		<div class="container-4">
-			<input type="search" id="search" placeholder="Search..." />
-			<button class="icon">
+			<input type="search" id="search" name="search" placeholder="Search..." />
+			<button class="icon" type="submit">
 				<i class="fa fa-search"></i>
 			</button>
 		</div>
 	</div>
+	</form>
+
 
 	<nav id="primary_nav_wrap">
 		<ul>

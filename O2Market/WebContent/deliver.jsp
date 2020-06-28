@@ -15,15 +15,15 @@
 </head>
 <body>
 결제완료 배송준비중입니다
-
 <%
+
 	String BeforePurchase="결제 대기";
 	int cnt = 0;
 	PurchasHistoryDao PHDao = new PurchasHistoryDao();
 	List<PurchaseHistory> list = PHDao.getPurchaseHistories();
 	for(PurchaseHistory PH:list){
 		if(BeforePurchase.equals(PH.getPaymentStatus())){
-			PHDao.updatePurchaseStatus(PH.getHistoryNumber());
+			//PHDao.updatePurchaseStatus(PH.getHistoryNumber());
 			cnt++;
 			System.out.print("배송");
 			%><%=cnt%> : <%=PH.toString() %><p>
