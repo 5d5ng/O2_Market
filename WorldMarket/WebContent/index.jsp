@@ -36,11 +36,11 @@
 	<br>
 	<br>
 	<div id="name">World Market</div>
-
+	<button onclick="window.open('search.jsp')">button</button>
 	<div class="box">
 		<div class="container-4">
 			<input type="search" id="search" placeholder="Search..." />
-			<button class="icon">
+			<button class="icon" onclick="window.open('search.jsp')">
 				<i class="fa fa-search"></i>
 			</button>
 		</div>
@@ -52,8 +52,7 @@
 				<ul>
 					<li><a href="./Category/Clothing.jsp">Clothing</a></li>
 					<li><a href="./Category/Cosmetics.jsp">Cosmetics</a></li>
-					<li><a href="./Category/HomeAppliances.jsp">Home
-							Appliances</a></li>
+					<li><a href="./Category/HomeAppliances.jsp">Home Appliances</a></li>
 					<li><a href="./Category/Foods.jsp">Foods</a></li>
 				</ul></li>
 		</ul>
