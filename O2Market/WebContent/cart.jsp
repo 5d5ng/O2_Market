@@ -95,6 +95,8 @@
 			nowOrderProduct = new OrderProduct(orderList.size() + 1, 1, customer.getCustomerID(),
 			nowProduct.getProductNumber(), shoppingCart.getHistoryNumber());
 			orderDao.addOrderProduct(nowOrderProduct);
+			
+			PHistoryDao.updatePurchaseHisory(nowProduct.getProductPrice(), shoppingCart.getHistoryNumber());
 
 		}
 
@@ -128,7 +130,7 @@ orderList = orderDao.getOrders(); //제품담은 후 다시받아오기
 		
 			
 		%>
-		총 결제금액<%=shoppingCart.getTotalCost() %>
+		총 결제금액<%=shoppingCart.getTotalCost()+nowProduct.getProductPrice() %>
 		<p>
 			
 			<button type="button" class="navyBtn" onClick="location.href='deliver.jsp?purchase=<%=shoppingCart.getHistoryNumber()%>'">주문하기</button>

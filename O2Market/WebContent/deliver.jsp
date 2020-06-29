@@ -23,10 +23,10 @@
 	List<PurchaseHistory> list = PHDao.getPurchaseHistories();
 	for(PurchaseHistory PH:list){
 		if(BeforePurchase.equals(PH.getPaymentStatus())){
-			//PHDao.updatePurchaseStatus(PH.getHistoryNumber());
+			PHDao.updatePurchaseStatus(PH.getHistoryNumber());
 			cnt++;
 			System.out.print("배송");
-			%><%=cnt%> : <%=PH.toString() %><p>
+			%><%=cnt%> : <%=PH.toString() %> 결제완료되었습니다.<p>
 			<% 
 			break;
 		}

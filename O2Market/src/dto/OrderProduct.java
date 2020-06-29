@@ -50,8 +50,8 @@ public class OrderProduct {
 	}
 	@Override
 	public String toString() {
-		return "ìƒí’ˆì£¼ë¬¸ë²ˆí˜¸:" + OrderNumber + ", ì£¼ë¬¸ìˆ˜ëŸ‰:" + Quantity + ", ê³ ê°ID" + CustomerID
-				+ ", ìƒí’ˆë²ˆí˜¸:" + ProductNumber + "êµ¬ë§¤ë‚´ì—­ë²ˆí˜¸:" + HistoryNumber + "]";
+		return "Á¦Ç°ÁÖ¹®¹øÈ£:" + OrderNumber + ", ¼ö·®:" + Quantity + ", È¸¿øID" + CustomerID
+				+ ", Á¦Ç°¹øÈ£:" + ProductNumber + "ÁÖ¹®¹øÈ£:" + HistoryNumber + "]";
 	}
 	
 	

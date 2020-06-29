@@ -123,7 +123,7 @@ public class PurchasHistoryDao {
 		
 	}
 	
-	public void updatePurchaseHisory(int productCost,int historyNum) { //�옣諛붽뎄�땲�뿉 �긽�뭹 異붽� �떆 珥� �뾽�뜲�씠�듃
+	public void updatePurchaseHisory(int productCost,int historyNum) { 
 		String sql = "UPDATE PurchaseHistory set totalcost = totalcost+? where Historynumber = ? ";
 		
 		try {
@@ -146,7 +146,7 @@ public class PurchasHistoryDao {
 		}
 		
 	}
-	public void updatePurchaseStatus(int historyNum) { //�옣諛붽뎄�땲�뿉 寃곗젣�셿猷� 蹂�寃�
+	public void updatePurchaseStatus(int historyNum) { 
 		String sql = "UPDATE PurchaseHistory set paymentStatus = '결제완료' where Historynumber = ? ";
 		
 		try {
@@ -169,7 +169,7 @@ public class PurchasHistoryDao {
 		
 	}
 	
-	public void deletePurchaseHistory(int historyNum) { //援щℓ�궡�뿭 �궘�젣 硫붿냼
+	public void deletePurchaseHistory(int historyNum) { //
 		String sql = "DELETE from PurchaseHistory where historynumber = ?";
 		try {
 			Class.forName("oracle.jdbc.OracleDriver");

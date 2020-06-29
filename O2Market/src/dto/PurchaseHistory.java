@@ -39,8 +39,8 @@ public class PurchaseHistory {
 	}
 	@Override
 	public String toString() {
-		return "구매내역 [구매내역번호:" + HistoryNumber + ", 고객ID=" + CustomerID + ", 결제금액:"
-				+ TotalCost + ", 결제상태:" + PaymentStatus + "]";
+		return "�ֹ���ȣ:" + HistoryNumber + ", ȸ��ID=" + CustomerID + ", �Ѿ�:"
+				+ TotalCost;
 	}
 	
 }
