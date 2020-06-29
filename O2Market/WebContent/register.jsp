@@ -88,8 +88,8 @@ td {
 				</tr>
 
 			</table>
-			<br> <input type="submit" value="가입" onclick ="input_chk()"/> <input type="reset"
-				value="취소">
+			<br> <input type="submit" value="가입" onclick ="input_chk()"/> <input type="reset" value="취소" onclick="location.href = 'index.jsp'"
+				>
 		</form>
 	</div>
 	<script>

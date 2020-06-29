@@ -15,125 +15,139 @@
 <body>
 	<%
 		request.setCharacterEncoding("euc-kr");
-	Customer customer = (Customer) session.getAttribute("pCustomer"); //로그인 고객
+	
+		Customer customer = (Customer) session.getAttribute("pCustomer"); //로그인 고객
 
-	if (customer == null) {
-		System.out.print("sssqs");
-		response.sendRedirect("Login.jsp");
-	}
+		
+		if (customer == null) {
+			response.sendRedirect("Login.jsp");
+		}
 
-	OrderProductDao orderDao = new OrderProductDao();
-	ProductDao productDao = new ProductDao();
+		OrderProductDao orderDao = new OrderProductDao();
+		ProductDao productDao = new ProductDao();
+
+		String parm = request.getParameter("order");
+		int ProductNum = -1;
+		if (parm != null) {
+			ProductNum = Integer.parseInt(parm) - 1; // 제품 파라미터로 받아옴
+		}
 	
 
-	String parm = request.getParameter("order");
-	int ProductNum = Integer.parseInt(parm) - 1; // 제품 파라미터로 받아옴
-	//System.out.println(ProductNum);
+		PurchasHistoryDao PHistoryDao = new PurchasHistoryDao();
 
-	PurchasHistoryDao PHistoryDao = new PurchasHistoryDao();
+		List<OrderProduct> orderList = orderDao.getOrders();
+		List<Product> productList = productDao.getProduct();
+		List<PurchaseHistory> historyList = PHistoryDao.getPurchaseHistories(); // 현재 로그인 고객의 구매리스트
 
-	List<OrderProduct> orderList = orderDao.getOrders();
-	List<Product> productList = productDao.getProduct();
-	List<PurchaseHistory> historyList = PHistoryDao.getPurchaseHistories(); // 현재 로그인 고객의 구매리스트
+		String cID = customer.getCustomerID();
+		String status = "결제 대기"; // 결제전이라는 의미
 
-	String cID = customer.getCustomerID();
-	String status = "결제 대기"; // 결제전이라는 의미
 
-	//		Product nowProduct = (Product) session.getAttribute("order"); //담을 제품
-	Product nowProduct = productList.get(ProductNum);
-	//session.removeAttribute("order");
-	System.out.println(nowProduct.getProductName());
-
-	//System.out.print(nowProduct.toString());
-	PurchaseHistory shoppingCart = null;
-	OrderProduct nowOrderProduct = null; // 
-
-	for (PurchaseHistory history : historyList) {
-		if (cID.equals(history.getCustomerID()) && status.equals(history.getPaymentStatus().trim())) { //결제하기 전 상태이고 CID에 해당하는 히스토리가 있다면 불러온다.
-			shoppingCart = history;
-			break;
+		Product nowProduct = null;
+		if (ProductNum >= 0) {
+			nowProduct = productList.get(ProductNum);
+			System.out.println(nowProduct.getProductName());
 		}
-	}
 
-	if (shoppingCart == null) { //장바구니를 새로 만들어야한다면
+	
+		PurchaseHistory shoppingCart = null;
+		OrderProduct nowOrderProduct = null; 
 
-		int Hnum = historyList.size() + 1;
-		String customerID = customer.getCustomerID();
-		int cost = nowProduct.getProductPrice();
-		int Onum = orderList.size() + 1;
-		int Pnum = nowProduct.getProductNumber();
-
-		shoppingCart = new PurchaseHistory(Hnum, customerID, cost, status);
-		PHistoryDao.addPurchaseHistory(shoppingCart); // 새로운 구매정보 즉 장바구니 추가
-
-		//OrderProduct추가
-		nowOrderProduct = new OrderProduct(Onum, 1, customerID, Pnum, Hnum);
-		orderDao.addOrderProduct(nowOrderProduct);
-
-	} else { //결제완료 안한 장바구니가 존재한다면 OrderProduct만 추가한다.
-
-		for (OrderProduct oProduct : orderList) {
-			int Hnum = oProduct.getHistoryNumber();
-			int CartHnum = shoppingCart.getHistoryNumber();
-			String CID = customer.getCustomerID();
-			String oProductCID = oProduct.getCustomerID();
-			int Pnum = nowProduct.getProductNumber();
-			int oProdcutNum = oProduct.getProductNumber();
-			System.out.println(
-			"비교해보기:" + Hnum + " " + CartHnum + " " + CID + " " + oProductCID + " " + oProdcutNum + " " + Pnum);
-			if (Hnum == CartHnum && CID.equals(oProductCID) && oProdcutNum == Pnum) { //OrderProduct객체 중 주문번호,회원아이디,제품번호 셋다 동일한 경우
-		//UPDATE문 작성
-		orderDao.updateOrderProduct(oProduct.getOrderNumber());
-		nowOrderProduct = oProduct;
-		System.out.println("동일제품존재");
-		PHistoryDao.updatePurchaseHisory(nowProduct.getProductPrice(), Hnum); // 이번에 넣을 제품가격을 넣어야함
-		break;
+		for (PurchaseHistory history : historyList) {
+			if (cID.equals(history.getCustomerID()) && status.equals(history.getPaymentStatus().trim())) { //결제하기 전 상태이고 CID에 해당하는 히스토리가 있다면 불러온다.
+				shoppingCart = history;
+				break;
 			}
-
 		}
-		if (nowOrderProduct == null) {
-			nowOrderProduct = new OrderProduct(orderList.size() + 1, 1, customer.getCustomerID(),
-			nowProduct.getProductNumber(), shoppingCart.getHistoryNumber());
-			orderDao.addOrderProduct(nowOrderProduct);
-			
-			PHistoryDao.updatePurchaseHisory(nowProduct.getProductPrice(), shoppingCart.getHistoryNumber());
+		if (nowProduct != null) { //받아온 제품이없는경우
 
+			if (shoppingCart == null) { //장바구니를 새로 만들어야한다면
+
+				int Hnum = historyList.size() + 1;
+				String customerID = customer.getCustomerID();
+				int cost = nowProduct.getProductPrice();
+				int Onum = orderList.size() + 1;
+				int Pnum = nowProduct.getProductNumber();
+
+				shoppingCart = new PurchaseHistory(Hnum, customerID, cost, status);
+				PHistoryDao.addPurchaseHistory(shoppingCart); // 새로운 구매정보 즉 장바구니 추가
+
+				//OrderProduct추가
+				nowOrderProduct = new OrderProduct(Onum, 1, customerID, Pnum, Hnum);
+				orderDao.addOrderProduct(nowOrderProduct);
+
+			} else { //결제완료 안한 장바구니가 존재한다면 OrderProduct만 추가한다.
+
+				for (OrderProduct oProduct : orderList) {
+					int Hnum = oProduct.getHistoryNumber();
+					int CartHnum = shoppingCart.getHistoryNumber();
+					String CID = customer.getCustomerID();
+					String oProductCID = oProduct.getCustomerID();
+					int Pnum = nowProduct.getProductNumber();
+					int oProdcutNum = oProduct.getProductNumber();
+					System.out.println("비교해보기:" + Hnum + " " + CartHnum + " " + CID + " " + oProductCID + " "
+							+ oProdcutNum + " " + Pnum);
+					if (Hnum == CartHnum && CID.equals(oProductCID) && oProdcutNum == Pnum) { //OrderProduct객체 중 주문번호,회원아이디,제품번호 셋다 동일한 경우
+						//UPDATE문 작성
+						orderDao.updateOrderProduct(oProduct.getOrderNumber());
+						nowOrderProduct = oProduct;
+						System.out.println("동일제품존재");
+						PHistoryDao.updatePurchaseHisory(nowProduct.getProductPrice(), Hnum); // 이번에 넣을 제품가격을 넣어야함
+						break;
+					}
+
+				}
+				if (nowOrderProduct == null) {
+					nowOrderProduct = new OrderProduct(orderList.size() + 1, 1, customer.getCustomerID(),
+							nowProduct.getProductNumber(), shoppingCart.getHistoryNumber());
+					orderDao.addOrderProduct(nowOrderProduct);
+
+					PHistoryDao.updatePurchaseHisory(nowProduct.getProductPrice(), shoppingCart.getHistoryNumber());
+
+				}
+
+			}
 		}
 
-	}
-
-	//히스토리에 OrderProduct 추가하는 부분
-orderList = orderDao.getOrders(); //제품담은 후 다시받아오기
-
+		//히스토리에 OrderProduct 추가하는 부분
+		orderList = orderDao.getOrders(); //제품담은 후 다시받아오기
 	%>
 
 	<div>
 
 		<%=customer.getName()%>님의 장바구니 현황입니다.<br>
 		<%
-	
+		
+			int totalC = 0;
 
-				int cnt = 0;
-				
-				cnt++;
-				
-				
-				for (OrderProduct Oproduct : orderList) {
-					if(Oproduct.getHistoryNumber()==shoppingCart.getHistoryNumber()){
+			for (OrderProduct Oproduct : orderList) {
+				if (Oproduct.getHistoryNumber() == shoppingCart.getHistoryNumber()) {
+					Product tempP = productDao.getProductbyPnum(Oproduct.getProductNumber());
+					totalC += Oproduct.getQuantity() * tempP.getProductPrice();
 		%>
-		 제품 정보<br><%=productDao.getProductbyPnum(Oproduct.getProductNumber()).toString()%> 주문량 : <%=Oproduct.getQuantity() %><br>
-		
-		<%System.out.println(Oproduct.toString());
-			}
+		제품 정보<br><%=tempP.toString()%>
+		주문량 :
+		<%=Oproduct.getQuantity()%>
+		<button type="button"
+			OnClick="location.href='deleteOrder.jsp?Dorder=<%=Oproduct.getOrderNumber()%>'">상품
+			장바구니에서 제거</button>
+		<br>
+
+
+		<%
+			System.out.println(Oproduct.toString());
 				}
-		
-		
+			}
 			
 		%>
-		총 결제금액<%=shoppingCart.getTotalCost()+nowProduct.getProductPrice() %>
+
+
+		총 결제금액<%=totalC%>
+		
 		<p>
-			
-			<button type="button" class="navyBtn" onClick="location.href='deliver.jsp?purchase=<%=shoppingCart.getHistoryNumber()%>'">주문하기</button>
+
+			<button type="button" class="navyBtn"
+				onClick="location.href='deliver.jsp?purchase=<%=shoppingCart.getHistoryNumber()%>'">주문하기</button>
 	</div>
 
 

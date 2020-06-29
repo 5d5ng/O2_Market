@@ -12,11 +12,27 @@
 </head>
 <body>
 <%
+Customer customer = (Customer) session.getAttribute("pCustomer");
 
 PurchasHistoryDao PDao = new PurchasHistoryDao();
-List<PurchaseHistory> Ph = PDao.getPurchaseHistories();
+List<PurchaseHistory> PhList = PDao.getPurchaseHistories();
+if(customer!=null){
+
+	String nowID = customer.getCustomerID();
+	%>
+	<%=nowID %>님의 마이페이지<p>
+	<% 
+for(PurchaseHistory PH:PhList){
+	if(nowID.equals(PH.getCustomerID())){
+		%>
+		<%= PH.toString() %><p>
+		<%
+	}
+}
+}
+
 %>
-<%= Ph.get(0).toString() %>
+
 
 
 </body>

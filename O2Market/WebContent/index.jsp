@@ -72,6 +72,7 @@
 
 	<div class="items">
 		<% 
+		
 	for(int i=1; i<productList.size();i++){
 	%>
 		<div class="item">
@@ -102,7 +103,10 @@
 			
 		</form>
 		</div>
-		<%}%>
+		<%}
+		
+		%>
+		
 	</div>
 	
 
