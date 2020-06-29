@@ -15,8 +15,9 @@ public class Test {
 		Pdao.deleteProduct(400);
 		//OPdao.updateOrderProduct(1);
 //		PHdao.updatePurchaseHisory(11231, 1);
-		
-		OPdao.updateOrderProduct(1);
+		Delivery d = new Delivery("123","123",1);
+		Ddao.addDelivery(d);
+	
 	System.out.println("sss");
 
 		

@@ -40,7 +40,7 @@
 
 	<br>
 	<br>
-	<div id="name">World Market</div>
+	<div id="name"><a href="index.jsp">O2 Market</a></div>
 	<button name = "logout" type = "button" onclick="location.href= 'Login.jsp' "><%= loginStatus%></button>
 	<% if(Mypage != null) { %>
 	<button name = "Mypage" type = "button" onclick="location.href= 'Mypage.jsp' "><%= Mypage%></button>

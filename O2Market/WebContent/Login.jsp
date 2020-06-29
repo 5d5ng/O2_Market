@@ -5,8 +5,21 @@
 <head>
 <meta charset="EUC-KR">
 <title>Insert title here</title>
+<link
+	href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css"
+	rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="Background.css">
+<style> 
+.loginForm{
+	position:absolute;
+	top:10%;
+	left:40%;
+}
+
+</style>
 </head>
 <body>
+<div id="name"><a href="index.jsp">O2 Market</a></div>
 	<%
 		
 		session.removeAttribute("pCustomer"); //로그인 초기
@@ -20,6 +33,7 @@
 			
 		}
 	%>
+	<div class = "loginForm">
 	<h1>로그인 해주세요.</h1>
 	<form action="LoginCheck.jsp" method="post">
 		아이디 <input type="text" name="id"><br> 
@@ -27,5 +41,7 @@
 		<input type="submit" value="로그인">
 	</form>
 	<button onClick="location.href = 'register.jsp'" > 회원가입</button>
+	
+	</div>
 </body>
 </html>

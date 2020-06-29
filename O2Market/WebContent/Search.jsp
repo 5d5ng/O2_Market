@@ -8,9 +8,14 @@
 <html>
 <head>
 <meta charset="EUC-KR">
-<title>Insert title here</title>
+<link
+	href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css"
+	rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="Background.css">
+<title>상품검색</title>
 </head>
 <body>
+<div id="name"><a href="index.jsp">O2 Market</a></div>
 <%
 String name = request.getParameter("search"); 
 

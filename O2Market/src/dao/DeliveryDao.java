@@ -14,7 +14,7 @@ public class DeliveryDao {
 	private static  String dbUser = "db201512119";
 	private static  String dbpasswd = "201512119";
 
-	//��� ����Ʈ �޾ƿ���
+	//占쏙옙占� 占쏙옙占쏙옙트 占쌨아울옙占쏙옙
 	public List<Delivery> getDeliveries(){
 		List<Delivery> list = new LinkedList<>();
 		try {
@@ -62,7 +62,7 @@ public class DeliveryDao {
 		try {
 			Class.forName("oracle.jdbc.OracleDriver");
 			conn = DriverManager.getConnection(dburl,dbUser,dbpasswd);
-			String sql = "INSERT INTO Customer VALUES (?,?,?)";
+			String sql = "INSERT INTO delivery VALUES (?,?,?)";
 
 			ps = conn.prepareStatement(sql);
 

@@ -150,7 +150,7 @@ public class ProductDao {
 	}
 
 
-	public void updateProduct(int productNum) { //제품이 주문완료된 경우 재고에서 뺀다.
+	public void updateProduct(int productNum) { //�젣�뭹�씠 二쇰Ц�셿猷뚮맂 寃쎌슦 �옱怨좎뿉�꽌 類��떎.
 		String sql = "UPDATE product set stock=stock-1 where productNumber = ?";
 
 		try {
@@ -171,8 +171,30 @@ public class ProductDao {
 			e.printStackTrace();
 		}
 	}
+	public void updateBackProduct(int productNum,int amount) {
+		String sql = "UPDATE product set stock=stock+? where productNumber = ?";
 
-	public void deleteProduct(int productNum) { // 상품 명단에서 제거
+		try {
+
+			Class.forName("oracle.jdbc.OracleDriver");
+
+			Connection conn = DriverManager.getConnection(dburl, dbUser, dbpasswd);
+
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setInt(1,amount);
+			ps.setInt(2, productNum);
+			int numRows = ps.executeUpdate();
+			ps.close();
+			conn.close();
+
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}catch(ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void deleteProduct(int productNum) { // �긽�뭹 紐낅떒�뿉�꽌 �젣嫄�
 		String sql = "DELETE from PRODUCT where productnumber = ?";
 		
 		try {
