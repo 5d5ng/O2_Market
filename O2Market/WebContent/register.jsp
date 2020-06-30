@@ -5,7 +5,7 @@
 <link
 	href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css"
 	rel="stylesheet">
-<link rel="stylesheet" type="text/css" href="Background.css">
+<link rel="stylesheet" type="text/css" href="css/Background.css">
 <title>회원가입</title>
 
 <style>
