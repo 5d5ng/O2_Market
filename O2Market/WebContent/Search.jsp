@@ -15,7 +15,9 @@
 <title>상품검색</title>
 </head>
 <body>
-<div id="name"><a href="index.jsp">O2 Market</a></div>
+ <div id="Home" onclick = "location.href = './index.jsp'">Home<span> &rarr;</span></div>
+
+<div id="name">O2 Market</a></div>
 <%
 String name = request.getParameter("search"); 
 

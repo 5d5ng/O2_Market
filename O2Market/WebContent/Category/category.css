@@ -70,3 +70,27 @@ span {
     height: 24px;
     margin: 0 10px 0 0;
 }
+#Home {
+  padding: 10px;
+  font-size: 16px;
+  color: white;
+  display: inline-block;
+  margin: 2px;
+  border-radius: 3px;
+  text-align: center;
+  transition: background 0.2s;
+  background: #0a8f6c;
+  cursor: pointer;
+}
+
+#Home > span {
+  width: 0;
+  display: inline-block;
+  overflow: hidden;
+  transition: width .3s;
+  text-align: right;
+}
+
+#Home:hover > span {
+  width: 20px;
+}

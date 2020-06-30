@@ -11,7 +11,6 @@ public class CustomerDao {
 	private static  String dbpasswd = "201512119";
 
 	
-	//ȸ������Ʈ �޾ƿ���
 	public List<Customer> getCustomers(){
 		List<Customer> list = new LinkedList<>();
 		try {
@@ -35,7 +34,7 @@ public class CustomerDao {
 					String eMail = rs.getString(6);
 
 					Customer customer = new Customer(customerID, customerPW, name, age, phoneNumber, eMail);
-					System.out.println(customer.toString());
+					
 					list.add(customer);
 
 

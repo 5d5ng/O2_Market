@@ -13,6 +13,8 @@
 
 </head>
 <body>
+	 <div id="Home" onclick = "location.href = '../index.jsp'">Home<span> &rarr;</span></div>
+
 	<div class="wrapper">
 		<h1>Clothing</h1>
 		<span><i class="shopping-cart"></i></span>
@@ -22,7 +24,7 @@
 				ProductDao PDao = new ProductDao();
 			List<Product> list = PDao.getProduct();
 			for (int i = 0; i < list.size(); i++) {
-				System.out.println(list.get(i).getCategory());
+		
 				if(list.get(i).getCategory().equals("°¡Àü")){
 			%>
 			<div class="item">

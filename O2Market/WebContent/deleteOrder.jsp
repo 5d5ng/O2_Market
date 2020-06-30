@@ -16,8 +16,10 @@
 <%
 String param1= request.getParameter("Dorder");
 String param2 = request.getParameter("productnum");
+if(param1==null||param2==null){
+	response.sendRedirect("Login.jsp");
+}
 
-System.out.println(param1+" "+param2);
 int cancelNum = Integer.parseInt(param1);
 int productNum = Integer.parseInt(param2);
 PurchasHistoryDao PHDao= new PurchasHistoryDao();
@@ -38,13 +40,13 @@ for(Product p:ProductList){
 
 
 for(OrderProduct OP:list){
-	System.out.println(cancelNum+" " +OP.getOrderNumber());
+	
 	if(OP.getOrderNumber() == cancelNum){
 		orderDao.deleteProduct(cancelNum);
 		
 		PHDao.updatePurchaseHisory(-nowProduct.getProductPrice() * OP.getQuantity() , OP.getHistoryNumber());
 		ProductDao.updateBackProduct(productNum, OP.getQuantity());
-		System.out.print("삭제완료");
+		
 		
 	}
 }

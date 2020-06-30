@@ -1,33 +1,38 @@
 
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-	pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%@page import="java.util.*"%>
 <%@page import="java.sql.*"%>
 <%@page import="dto.*"%>
-<%@page import="dao.ProductDao"%>
 <%@page import="dao.*"%>
-<!DOCTYPE html>
+
+
 <html>
-<head>
-<meta charset="EUC-KR">
-<link
-	href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css"
-	rel="stylesheet">
-<link rel="stylesheet" type="text/css" href="Background.css">
-<title>Àå¹Ù±¸´Ï</title>
-</head>
+<title></title>
 <body>
-	<div id="name">
-		<a href="index.jsp">O2 Market</a>
-	</div>
+<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="cart.css">
+ <div id="Home" onclick = "location.href = 'index.jsp'">Home<span> &rarr;</span></div><br><br><br>
+
+<div class="container">
+  <table id="cart" class="table table-hover table-condensed">
+    <thead>
+      <tr>
+        <th style="width:50%">ì œí’ˆ</th>
+        <th style="width:10%">ê°€ê²©</th>
+        <th style="width:8%">ìˆ˜ëŸ‰</th>
+        <th style="width:22%" class="text-center">ê°€ê²©í•©</th>
+        <th style="width:10%"></th>
+      </tr>
+    </thead>
+
 	<%
 		int maxOrderNum = 0;
 		request.setCharacterEncoding("euc-kr");
 		OrderProductDao orderDao = new OrderProductDao();
 		ProductDao productDao = new ProductDao();
-		Customer customer = (Customer) session.getAttribute("pCustomer"); //·Î±×ÀÎ °í°´
+		Customer customer = (Customer) session.getAttribute("pCustomer"); //ë¡œê·¸ì¸ ê³ ê°
 		String cID = null;
-		String status = "°áÁ¦ ´ë±â"; // °áÁ¦ÀüÀÌ¶ó´Â ÀÇ¹Ì
+		String status = "ê²°ì œ ëŒ€ê¸°"; // ê²°ì œì „ì´ë¼ëŠ” ì˜ë¯¸
 
 		if (customer == null) {
 			response.sendRedirect("Login.jsp");
@@ -37,7 +42,7 @@
 		String parm = request.getParameter("order");
 		int ProductNum = -1;
 		if (parm != null) {
-			ProductNum = Integer.parseInt(parm) - 1; // Á¦Ç° ÆÄ¶ó¹ÌÅÍ·Î ¹Ş¾Æ¿È
+			ProductNum = Integer.parseInt(parm) - 1; // ì œí’ˆ íŒŒë¼ë¯¸í„°ë¡œ ë°›ì•„ì˜´
 
 		}
 
@@ -45,7 +50,7 @@
 
 		List<OrderProduct> orderList = orderDao.getOrders();
 		List<Product> productList = productDao.getProduct();
-		List<PurchaseHistory> historyList = PHistoryDao.getPurchaseHistories(); // ÇöÀç ·Î±×ÀÎ °í°´ÀÇ ±¸¸Å¸®½ºÆ®
+		List<PurchaseHistory> historyList = PHistoryDao.getPurchaseHistories(); // í˜„ì¬ ë¡œê·¸ì¸ ê³ ê°ì˜ êµ¬ë§¤ë¦¬ìŠ¤íŠ¸
 
 		for (OrderProduct Oproduct : orderList) {
 			if (maxOrderNum < Oproduct.getOrderNumber()) {
@@ -57,14 +62,14 @@
 		Product nowProduct = null;
 		if (ProductNum >= 0) {
 			nowProduct = productList.get(ProductNum);
-			System.out.println(nowProduct.getProductName());
+		
 		}
 
 		PurchaseHistory shoppingCart = null;
 		OrderProduct nowOrderProduct = null;
 
-		for (PurchaseHistory history : historyList) { //ÀÌ¹Ì Àå¹Ù±¸´Ï°¡ Á¸ÀçÇÏ´Â °æ¿ì
-			if (cID.equals(history.getCustomerID()) && status.equals(history.getPaymentStatus().trim())) { //°áÁ¦ÇÏ±â Àü »óÅÂÀÌ°í CID¿¡ ÇØ´çÇÏ´Â È÷½ºÅä¸®°¡ ÀÖ´Ù¸é ºÒ·¯¿Â´Ù.
+		for (PurchaseHistory history : historyList) { //ì´ë¯¸ ì¥ë°”êµ¬ë‹ˆê°€ ì¡´ì¬í•˜ëŠ” ê²½ìš°
+			if (cID.equals(history.getCustomerID()) && status.equals(history.getPaymentStatus().trim())) { //ê²°ì œí•˜ê¸° ì „ ìƒíƒœì´ê³  CIDì— í•´ë‹¹í•˜ëŠ” íˆìŠ¤í† ë¦¬ê°€ ìˆë‹¤ë©´ ë¶ˆëŸ¬ì˜¨ë‹¤.
 				shoppingCart = history;
 				break;
 			}
@@ -72,7 +77,7 @@
 		if (nowProduct != null) {
 			productDao.updateProduct(nowProduct.getProductNumber());
 
-			if (shoppingCart == null) { //Àå¹Ù±¸´Ï¸¦ »õ·Î ¸¸µé¾î¾ßÇÑ´Ù¸é
+			if (shoppingCart == null) { //ì¥ë°”êµ¬ë‹ˆë¥¼ ìƒˆë¡œ ë§Œë“¤ì–´ì•¼í•œë‹¤ë©´
 
 				int Hnum = historyList.size() + 1;
 				String customerID = customer.getCustomerID();
@@ -82,13 +87,13 @@
 
 				shoppingCart = new PurchaseHistory(Hnum, customerID, cost, status);
 
-				PHistoryDao.addPurchaseHistory(shoppingCart); // »õ·Î¿î ±¸¸ÅÁ¤º¸ Áï Àå¹Ù±¸´Ï Ãß°¡
+				PHistoryDao.addPurchaseHistory(shoppingCart); // ìƒˆë¡œìš´ êµ¬ë§¤ì •ë³´ ì¦‰ ì¥ë°”êµ¬ë‹ˆ ì¶”ê°€
 
-				//OrderProductÃß°¡
+				//OrderProductì¶”ê°€
 				nowOrderProduct = new OrderProduct(Onum, 1, customerID, Pnum, Hnum);
 				orderDao.addOrderProduct(nowOrderProduct);
 
-			} else { //°áÁ¦¿Ï·á ¾ÈÇÑ Àå¹Ù±¸´Ï°¡ Á¸ÀçÇÑ´Ù¸é OrderProduct¸¸ Ãß°¡ÇÑ´Ù.
+			} else { //ê²°ì œì™„ë£Œ ì•ˆí•œ ì¥ë°”êµ¬ë‹ˆê°€ ì¡´ì¬í•œë‹¤ë©´ OrderProductë§Œ ì¶”ê°€í•œë‹¤.
 
 				for (OrderProduct oProduct : orderList) {
 					int Hnum = oProduct.getHistoryNumber();
@@ -97,15 +102,14 @@
 					String oProductCID = oProduct.getCustomerID();
 					int Pnum = nowProduct.getProductNumber();
 					int oProdcutNum = oProduct.getProductNumber();
-					System.out.println("ºñ±³ÇØº¸±â:" + Hnum + " " + CartHnum + " " + CID + " " + oProductCID + " "
-							+ oProdcutNum + " " + Pnum);
-					if (Hnum == CartHnum && CID.equals(oProductCID) && oProdcutNum == Pnum) { //OrderProduct°´Ã¼ Áß ÁÖ¹®¹øÈ£,È¸¿ø¾ÆÀÌµğ,Á¦Ç°¹øÈ£ ¼Â´Ù µ¿ÀÏÇÑ °æ¿ì
-						//UPDATE¹® ÀÛ¼º
+					
+					if (Hnum == CartHnum && CID.equals(oProductCID) && oProdcutNum == Pnum) { //OrderProductê°ì²´ ì¤‘ ì£¼ë¬¸ë²ˆí˜¸,íšŒì›ì•„ì´ë””,ì œí’ˆë²ˆí˜¸ ì…‹ë‹¤ ë™ì¼í•œ ê²½ìš°
+						//UPDATEë¬¸ ì‘ì„±
 						orderDao.updateOrderProduct(oProduct.getOrderNumber());
 						nowOrderProduct = oProduct;
-						System.out.println("¿©±â´Ù!¿©±â!");
-						PHistoryDao.updatePurchaseHisory(nowProduct.getProductPrice(), Hnum); // ÀÌ¹ø¿¡ ³ÖÀ» Á¦Ç°°¡°İÀ» ³Ö¾î¾ßÇÔ
-						System.out.println("µ¿ÀÏÁ¦Ç°Á¸Àç");
+						
+						PHistoryDao.updatePurchaseHisory(nowProduct.getProductPrice(), Hnum); // ì´ë²ˆì— ë„£ì„ ì œí’ˆê°€ê²©ì„ ë„£ì–´ì•¼í•¨
+					
 						break;
 					}
 
@@ -116,8 +120,7 @@
 					nowOrderProduct = new OrderProduct(maxOrderNum + 1, 1,
 							customer.getCustomerID(), nowProduct.getProductNumber(),
 							shoppingCart.getHistoryNumber());
-					System.out.println("¿©±â´Ù!¿©±â!123");
-					System.out.println(nowOrderProduct.toString());
+					
 					orderDao.addOrderProduct(nowOrderProduct);
 
 					PHistoryDao.updatePurchaseHisory(nowProduct.getProductPrice(), shoppingCart.getHistoryNumber());
@@ -127,13 +130,18 @@
 			}
 		}
 
-		//È÷½ºÅä¸®¿¡ OrderProduct Ãß°¡ÇÏ´Â ºÎºĞ
-		orderList = orderDao.getOrders(); //Á¦Ç°´ãÀº ÈÄ ´Ù½Ã¹Ş¾Æ¿À±â
+		//íˆìŠ¤í† ë¦¬ì— OrderProduct ì¶”ê°€í•˜ëŠ” ë¶€ë¶„
+		orderList = orderDao.getOrders(); //ì œí’ˆë‹´ì€ í›„ ë‹¤ì‹œë°›ì•„ì˜¤ê¸°
+	
 	%>
 
 	<div>
+	
+	
 
-		<%=customer.getName()%>´ÔÀÇ Àå¹Ù±¸´Ï ÇöÈ²ÀÔ´Ï´Ù.<br>
+    
+    
+		<h1><%=customer.getName()%>ë‹˜ì˜ ì¥ë°”êµ¬ë‹ˆ í˜„í™©ì…ë‹ˆë‹¤.<br><br><br>
 		<%
 			int totalC = 0;
 			if (shoppingCart != null) {
@@ -141,20 +149,29 @@
 					if (Oproduct.getHistoryNumber() == shoppingCart.getHistoryNumber()) {
 						Product tempP = productDao.getProductbyPnum(Oproduct.getProductNumber());
 						totalC += Oproduct.getQuantity() * tempP.getProductPrice();
-						System.out.println(Oproduct.getQuantity()+" "+tempP.getProductPrice());
-		%>
-		Á¦Ç° Á¤º¸<br><%=tempP.toString()%>
-		ÁÖ¹®·® :
-		<%=Oproduct.getQuantity()%>
-
-		<button type="button"
-			OnClick="location.href='deleteOrder.jsp?Dorder=<%=Oproduct.getOrderNumber()%>&productnum=<%=Oproduct.getProductNumber()%>' ">»óÇ°
-			Àå¹Ù±¸´Ï¿¡¼­ Á¦°Å</button>
-		<br>
-
-
+						
+						%>
+						 <tbody>
+					      <tr>
+					        <td data-th="Product">
+					          <div class="row">
+					            <div class="col-sm-2 hidden-xs"><img src="./Category/images/<%=tempP.getProductNumber() %>.jpg" class="img-responsive" /></div>
+					            <div class="col-sm-10">
+					              <h4 class="nomargin"><%=tempP.getProductName()%></h4>
+					            </div>
+					          </div>
+					        </td>
+					        <td data-th="Price"><%= tempP.getProductPrice()%></td>
+					        <td data-th="Quantity"><%= Oproduct.getQuantity()%></td>
+					        <td data-th="Subtotal" class="text-center"><%= tempP.getProductPrice() * Oproduct.getQuantity()%></td>
+					        <td class="actions" data-th="">
+					        <td> <button type="button" OnClick="location.href='deleteOrder.jsp?Dorder=<%=Oproduct.getOrderNumber()%>&productnum=<%=Oproduct.getProductNumber()%>' ">ì œê±°</button>
+					        </td>
+					      
+					      </tr>
+					    </tbody>
 		<%
-			System.out.println(Oproduct.toString());
+		
 					}
 				}
 
@@ -164,29 +181,34 @@
 
 
 
-		ÃÑ °áÁ¦±İ¾×<%=totalC%>
+			
+		
+	</div>
 
-		<p>
+    <tfoot>
 
-			<%
+      <tr class="visible-xs">
+      </tr>
+      <tr>
+        <td colspan="2" class="hidden-xs"></td>
+        <td class="hidden-xs text-center"><strong>ì´ì•¡ : <%=totalC%>ì›</strong></td>
+        
+        <%
 				session.setAttribute("nowProduct", nowProduct);
 
 				if (shoppingCart != null) {
 			%>
-			<button type="button" class="navyBtn"
-				onClick="location.href='deliver.jsp?purchase=<%=shoppingCart.getHistoryNumber()%>'">ÁÖ¹®ÇÏ±â</button>
+			 <td><a href='deliver.jsp?purchase=<%=shoppingCart.getHistoryNumber()%>' class="btn btn-success btn-block">ì£¼ë¬¸í•˜ê¸° <i class="fa fa-angle-right"></i></a></td>
 			<%
 				} else {
 			%>
-			ÁÖ¹®ÇÒ »óÇ°ÀÌ ¾ø½À´Ï´Ù.
+			<h1>ì£¼ë¬¸í•  ìƒí’ˆì´ ì—†ìŠµë‹ˆë‹¤.
 			<%
 				}
 			%>
-		
-	</div>
-
-
-
-
+      </tr>
+    </tfoot>
+  </table>
+</div>
 </body>
 </html>

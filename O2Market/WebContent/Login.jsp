@@ -19,7 +19,7 @@
 </style>
 </head>
 <body>
-<div id="name"><a href="index.jsp">O2 Market</a></div>
+	 <div id="Home" onclick = "location.href = './index.jsp'">Home<span> &rarr;</span></div>
 	<%
 		
 		session.removeAttribute("pCustomer"); //로그인 초기

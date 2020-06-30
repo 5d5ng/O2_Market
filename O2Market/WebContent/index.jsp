@@ -25,7 +25,8 @@
 	if(customer != null){
 		loginStatus = "로그아웃";
 		Mypage = "마이페이지";
-
+		
+		
 		isLogin = true;
 	} 
 	
@@ -40,10 +41,12 @@
 
 	<br>
 	<br>
-	<div id="name"><a href="index.jsp">O2 Market</a></div>
+	<div id="name">O2 Market</a></div>
 	<button name = "logout" type = "button" onclick="location.href= 'Login.jsp' "><%= loginStatus%></button>
 	<% if(Mypage != null) { %>
 	<button name = "Mypage" type = "button" onclick="location.href= 'Mypage.jsp' "><%= Mypage%></button>
+	<button name = "Cart" type = "button" onclick="location.href= './cart.jsp' ">장바구니</button>
+	
 	<% } %>
 	<form action="Search.jsp">
 	<div class="box">
