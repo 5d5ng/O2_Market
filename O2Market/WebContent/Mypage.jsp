@@ -12,7 +12,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<link rel="stylesheet" type="text/css" href="Mypage.css">
+	<link rel="stylesheet" type="text/css" href="css/Mypage.css">
 
  <div id="Home" onclick = "location.href = './index.jsp'">Home<span> &rarr;</span></div>
 <div id="container">

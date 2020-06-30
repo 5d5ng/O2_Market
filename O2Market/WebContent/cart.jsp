@@ -10,7 +10,7 @@
 <title></title>
 <body>
 <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-<link rel="stylesheet" type="text/css" href="cart.css">
+<link rel="stylesheet" type="text/css" href="css/cart.css">
  <div id="Home" onclick = "location.href = 'index.jsp'">Home<span> &rarr;</span></div><br><br><br>
 
 <div class="container">

@@ -14,7 +14,7 @@
 <link
    href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css"
    rel="stylesheet">
-<link rel="stylesheet" type="text/css" href="Background.css">
+<link rel="stylesheet" type="text/css" href="css/Background.css">
 <title>구매 완료 페이지</title>
 </head>
 <body>
@@ -66,7 +66,8 @@
       %>
 
       <%=cnt%>주문번호 :
-      <%=PH.getHistoryNumber()%>번이 결제완료되었습니다.
+      <%=PH.getHistoryNumber()%>번이 결제완료되었습니다.<br>
+      결제완료된 금액은 <%=PH.getTotalCost() %> 입니다.
    <p>
 
       <%
