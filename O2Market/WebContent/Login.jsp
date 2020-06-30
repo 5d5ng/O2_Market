@@ -24,7 +24,7 @@
 		
 		session.removeAttribute("pCustomer"); //로그인 초기
 		String n = (String) session.getAttribute("fail");
-		System.out.println(n);
+
 		if(n!=null){
 			%>
 			
