@@ -6,7 +6,7 @@ JSP를 이용한 쇼핑몰 웹사이트 개발
 
 # 이용 기술
 
----
+
 
 - HTML,CSS,JavaScript
 - Java
@@ -15,7 +15,6 @@ JSP를 이용한 쇼핑몰 웹사이트 개발
 
 # 개발 환경
 
----
 - Window10
 - Eclipse
 - Oracle Developer
@@ -23,7 +22,7 @@ JSP를 이용한 쇼핑몰 웹사이트 개발
 
 # 데이터 모델
 
----
+
 
 ![데이터모델](https://user-images.githubusercontent.com/43948697/86232676-4779a400-bbcf-11ea-8f04-15be8f684707.png)
 
@@ -31,7 +30,6 @@ JSP를 이용한 쇼핑몰 웹사이트 개발
 
 # 실행화면
 
----
 
 홈화면
 
@@ -41,7 +39,6 @@ JSP를 이용한 쇼핑몰 웹사이트 개발
 마이페이지
 
 ![마이페이지](https://user-images.githubusercontent.com/43948697/86232688-4ba5c180-bbcf-11ea-99dd-5c915cceca3c.png)
-
 
 장바구니
 
